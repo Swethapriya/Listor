@@ -1,7 +1,7 @@
 Travel = {"visit"}
 Shopping = {"buy","purchase","gift","get"}
 Chilling = {"dinner","dance","mall","salon","doctor"}
-Productive = {"complete","study","prepare"}
+career = {"complete","study","prepare"}
 Scheduled ={"class", "coaching", "training","match"}
 
 def genrerise(todo):
