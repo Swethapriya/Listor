@@ -1,42 +1,44 @@
-Travel = {"visit"}
+Health = {"doctor","checkup", "excercise"}
+career = {"complete","study","prepare", "learn"}
 Shopping = {"buy","purchase","gift","get"}
-Chilling = {"dinner","dance","mall","salon","doctor"}
-career = {"complete","study","prepare"}
-Scheduled ={"class", "coaching", "training","match"}
+Travel = {"visit"}
+Chill = {"dinner","dance","mall","salon", "watch"}
+
 
 def genrerise(todo):
 	t = 0
 	shop = 0
-	c = 0
-	p = 0
-	s = 0
+	ch = 0
+	h = 0
+	car = 0
 	words = todo.split(" ")
 	for i in words:
 		if(i in Travel):
 			t += 1
 		if(i in Shopping):
 			shop += 1
-		if(i in Chilling):
-			c += 1
-		if(i in Productive):
-			p += 1
-		if(i in Scheduled):
-			s += 1
+		if(i in Chill):
+			ch += 1
+		if(i in Health):
+			h += 1
+		if(i in career):
+			car += 1
 	genres = []
 	if(t>0):
 		genres.append("travel")
 	if(shop>0):
 		genres.append("Shopping")
-	if(c>0):
+	if(ch>0):
 		genres.append("chill")
-	if(p>0):
-		genres.append("Productive")
-	if(s>0):
-		genres.append("Scheduled")
+	if(h>0):
+		genres.append("Health")
+	if(car>0):
+		genres.append("career")
 	return genres
 
 
-
+PriorityOrder = {"Health","career","Travel","Shopping"}
+LineOfImportance = 1
 n = int(input("Enter the number of todo's:"))
 for i in range(n):
 	todo = input()
