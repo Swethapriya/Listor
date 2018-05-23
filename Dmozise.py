@@ -9,6 +9,19 @@ from eventregistry.Base import *
 from eventregistry.ReturnInfo import *
 import tkinter
 from tkinter import *
+import matplotlib.pyplot as plt; plt.rcdefaults()
+import numpy as np
+import matplotlib.pyplot as plt
+from tkinter import filedialog as fd
+import pyscreenshot as ImageGrab 
+import image
+def save_file():
+
+    filename = fd.asksaveasfilename(defaultextension='.png', 
+         filetypes= [('Text','.txt'), ('image', '.png'), ('CSS', '.css')])
+    if filename:
+        print("User saved the filename with extension:", filename.split(".")[-1])
+
 
 class Analytics:
     def __init__(self, eventRegistry):
@@ -49,7 +62,7 @@ matrix = {'Arts': {'1':0,'2':0,'3':0,'4':0},
           'Shopping': {'1':0,'2':0,'3':0,'4':0},
           'Society': {'1':0,'2':0,'3':0,'4':0},
           'Sports': {'1':0,'2':0,'3':0,'4':0},
-          'Kids & Teens Directory': {'1':0,'2':0,'3':0,'4':0}
+          'Kids&Teens Directory': {'1':0,'2':0,'3':0,'4':0}
            }
 
 
@@ -94,47 +107,8 @@ root.title("Analysis")
 root.geometry("800x800")
 
 
-
-# top = Frame(root)
-# bottom = Frame(root)
-# topleft = Frame(top)
-# topright = Frame(top)
-# bottomleft = Frame(bottom)
-# bottomright = Frame(bottom)
-
-
-
-# top.pack(side="top")
-# bottom.pack(side="bottom")
-# topleft.pack(side="left")
-# topright.pack(side="right")
-# bottomleft.pack(side="left")
-# bottomright.pack(side="right")
-
-
-
-# labelframe1 = LabelFrame(topleft, text="Focus", bg = "red4", fg ="white", relief ="solid")
-# labelframe2 = LabelFrame(topright, text="Goals", bg = "blue4", fg ="white", relief ="solid")
-# labelframe3 = LabelFrame(bottomleft, text="Delegate", bg = "dark green", fg ="white", relief ="solid")
-# labelframe4 = LabelFrame(bottomright, text="Burnout", bg ="black", fg ="white", relief ="solid")
-
-
-# labelframe1.pack(fill=None, expand=False)
-# labelframe2.pack(fill=None, expand=False)
-# labelframe3.pack(fill=None, expand=False)
-# labelframe4.pack(fill=None, expand=False)
-
-# one = Label(labelframe1, text= Q1, background ="red",fg ="white")
-# one.pack()
-# two = Label(labelframe2, text=Q2, background ="blue",fg ="white")
-# two.pack()
-# three = Label(labelframe3, text=Q3, background ="forest green",fg ="white")
-# three.pack()
-# four = Label(labelframe4, text=Q4, background ="gray15",fg ="white")
-# four.pack()
-
 w = 800
-h = 800
+h = 800 
 wh = w/2
 hh = h/2
 wq = w/4
@@ -162,6 +136,20 @@ canvas.create_text(wq+wh,hq,fill="white",font="Times 15 italic bold",text=Q2)
 canvas.create_text(wq,hq+hh,fill="white",font="Times 15 italic bold",text=Q3)
 canvas.create_text(wq+wh,hq+hh,fill="white",font="Times 15 italic bold",text=Q4)
 
+retval = canvas.postscript(file="matrix.ps", height=800, width=800, colormode="color")
 
 root.mainloop()
 
+label = []
+y = []
+for key in matrix:
+  label.append(key)
+  y.append(sum(matrix[key].values()))
+
+index = np.arange(len(label))
+plt.bar(index, y)
+plt.xlabel('Genre')
+plt.ylabel('No of tasks', fontsize=9)
+plt.xticks(index, label, fontsize=9, rotation=30)
+plt.title('Analysis')
+plt.savefig("bargraph.png")
