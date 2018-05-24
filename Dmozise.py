@@ -95,7 +95,12 @@ for line in lines:
 Q = {'1' : [],'2' :[], '3': [], '4': []}
 
 for key in matrix:
-    Q[max(matrix[key], key=matrix[key].get)].append(key)
+    maximum = max(matrix[key], key=matrix[key].get) 
+    if(matrix[key][maximum]!=0):
+        Q[maximum].append(key)
+        print(key)
+        print(maximum)
+        print(matrix[key])
 
 Q1 = '\n'.join(Q['1'])
 Q2 = '\n'.join(Q['2'])
